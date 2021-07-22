@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script 
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous">
+    </script>
+    
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        body{
+            position: relative;
+            width: 100%;
+            float: left;
+            height: 100vh;
+            padding: 0px;
+            margin: 0px;
+        }
+        .clock {
+            width: 820px;
+            color:#75ffbf;
+            background:rgb(0, 0, 0);
+            position: absolute;
+            padding: 20px;
+            border: 5px solid grey;
+            border-radius: 20px;
+            margin: 0px;
+            float: left;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @media (min-width: 280px) and (max-width: 700px){
+            .clock{
+                width: 95% !important;
+                padding: 30px 0px !important;
+            }
+            ul li {
+            display:inline;
+            font-size: 3em !important;
+            }
+            ul li#tt{
+            font-size: 14px !important;
+            }
+            #Date {
+            font-size: 14px !important;
+            }
+        }
+        
+        #Date {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 34px;
+            text-align:center;
+        }
+        ul {
+            width: 100%;
+            list-style:none;
+            text-align:center;
+            padding: 0px;
+            margin: 0px;
+            float: left;
+            display: flex;
+            justify-content: center;
+        }
+        ul li {
+            display:inline;
+            font-size:10em;
+            text-align:center;
+            font-family:Arial, Helvetica, sans-serif;
+            padding: 0px;
+            margin: 0px;
+            float: left;
+        }
+        ul li#tt{
+            font-size: 70px;
+        }
+
+        #point {
+            position:relative;
+            -moz-animation:mymove 1s ease infinite;
+            -webkit-animation:mymove 1s ease infinite;
+            padding-left:10px; padding-right:10px;
+        }
+
+        @keyframes mymove 
+        {
+            0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+            50% {opacity:0; text-shadow:none; }
+            100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }    
+        }
+    </style>
+    
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        $(document).ready(function() {
+        var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+        var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+        var newDate = new Date();
+        newDate.setDate(newDate.getDate());
+        $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+        setInterval( function() {
+            var seconds = new Date().getSeconds();
+            $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+            },1000);
+            
+        setInterval( function() {
+            var minutes = new Date().getMinutes();
+            $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+            },1000);
+            
+        setInterval( function() {
+            var hours = new Date().getHours() % 12;
+            $("#hours").html(hours);
+            },1000);
+        setInterval(function(){
+            var AMPM = hours >= 12 ? 'PM' : 'AM';
+            $("#tt").html(AMPM)
+        })
+        }); 
+    </script>
+    
+    <div class="clock">
+        <div id="Date"></div>
+        <ul>
+            <li id="hours"></li>
+            <li id="point">:</li>
+            <li id="min"></li>
+            <li id="point">:</li>
+            <li id="sec"></li>
+            <li id="tt"></li>
+        </ul>
+    </div>
+    
+</body>
+</html>
