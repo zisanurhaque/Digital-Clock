@@ -125,7 +125,7 @@
             $("#hours").html(hours);
             },1000);
         setInterval(function(){
-            var AMPM = hours >= 12 ? 'PM' : 'AM';
+            var AMPM = (new Date().getHours()>= 12) ? 'PM' : 'AM';
             $("#tt").html(AMPM)
         })
         }); 
